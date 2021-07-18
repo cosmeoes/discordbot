@@ -1,5 +1,6 @@
 `use strict`;
 
+require('dotenv').config();
 const Discord = require('discord.js');
 
 
@@ -48,4 +49,4 @@ client.on('message', message => {
 });
 
 
-client.login('ODY2MzkyNDgyODQxNzU1NjU4.YPR44A.i9HzmuzNumHNltLLJuylFMJqK9k');
+client.login(process.env.TOKEN);
