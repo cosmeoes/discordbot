@@ -17,7 +17,7 @@ client.on('ready', () => {
 })
 
 client.on('message', message => {
-    if (message.author.bot || message.channel.type != 'text') {
+    if (message.author.bot || message.channel.type != 'text' || message.author.premium_type > 0) {
         return;
     }
 
