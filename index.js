@@ -20,6 +20,15 @@ client.on('message', message => {
     if (message.author.bot || message.channel.type != 'text' || message.author.premium_type > 0) {
         return;
     }
+    let member = false;
+
+    if (message.guild != null) {
+        member = message.guild.member(message.author);
+    }
+    
+    if (member && member.user.premium_type > 0) {
+        return;
+    }
 
     let content = message.content;
     let found = false;
@@ -34,11 +43,6 @@ client.on('message', message => {
     if (found)  {
         console.log("Sending message")
         message.delete()
-        let member = false;
-
-        if (message.guild != null) {
-            member = message.guild.member(message.author);
-        }
 
         let name = member ? member.displayName : message.author.username;
         const embed = new Discord.MessageEmbed()
