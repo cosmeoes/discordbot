@@ -7,6 +7,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 let emojis = {};
+let skip = ["toaster_with_wheels", "alire"];
 
 client.on('ready', () => {
     console.log("Hi, I'm awake");
@@ -17,18 +18,11 @@ client.on('ready', () => {
 })
 
 client.on('message', message => {
-    if (message.author.bot || message.channel.type != 'text' || message.author.premium_type > 0) {
+    if (message.author.bot || message.channel.type != 'text' || skip.includes(message.author.username.toLowerCase())) {
         return;
     }
-    let member = false;
-
-    if (message.guild != null) {
-        member = message.guild.member(message.author);
-    }
-    
-    if (member && member.user.premium_type > 0) {
-        return;
-    }
+   
+   
 
     let content = message.content;
     let found = false;
@@ -43,7 +37,12 @@ client.on('message', message => {
     if (found)  {
         console.log("Sending message")
         message.delete()
+        let member = false;
 
+        if (message.guild != null) {
+            member = message.guild.member(message.author);
+        }
+        
         let name = member ? member.displayName : message.author.username;
         const embed = new Discord.MessageEmbed()
             .setTitle(name)
