@@ -7,7 +7,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 let emojis = {};
-let skip = ["toaster_with_wheels", "alire"];
+let skip = ["alire"];
 
 client.on('ready', () => {
     console.log("Hi, I'm awake");
